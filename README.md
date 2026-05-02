@@ -1,4 +1,4 @@
-git clone https://github.com/your-username/python-chess-ai.git
+1   git clone https://github.com/your-username/python-chess-ai.git
     cd python-chess-ai
     ```
 
