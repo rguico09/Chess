@@ -1,20 +1,21 @@
-1.  ```bash
+1.  **Clone repository**
+    ```bash
     git clone https://github.com/your-username/python-chess-ai.git
     cd python-chess-ai
     ```
 
-2.  **Create a virtual environment (Optional but recommended):**
+3.  **Create a virtual environment (Optional but recommended):**
     ```bash
     python -m venv venv
     source venv/bin/activate  # On Windows: venv\Scripts\activate
     ```
 
-3.  **Install dependencies:**
+4.  **Install dependencies:**
     ```bash
     pip install pygame
     ```
 
-4.  **Run the game:**
+5.  **Run the game:**
     ```bash
     python main.py
     ```
