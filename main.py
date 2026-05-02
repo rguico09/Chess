@@ -1,7 +1,6 @@
 import pygame, sys
 from settings import *
 from board import Board
-from piece import Piece
 
 class Game:
     def __init__(self):
@@ -11,21 +10,15 @@ class Game:
         self.clock = pygame.time.Clock()
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.board = Board()
-        self.white_pieces = [pygame.transform.scale(pygame.image.load("assets/white_pawn.png"), (50, 50)),
-                             pygame.transform.scale(pygame.image.load("assets/white_rook.png"), (50, 50)),
-                             pygame.transform.scale(pygame.image.load("assets/white_knight.png"), (50, 50)),
-                             pygame.transform.scale(pygame.image.load("assets/white_bishop.png"), (50, 50)),
-                             pygame.transform.scale(pygame.image.load("assets/white_queen.png"), (50, 50)),
-                             pygame.transform.scale(pygame.image.load("assets/white_king.png"), (50, 50))]
-        self.black_pieces = [pygame.transform.scale(pygame.image.load("assets/black_pawn.png"), (50, 50)),
-                             pygame.transform.scale(pygame.image.load("assets/black_rook.png"), (50, 50)),
-                             pygame.transform.scale(pygame.image.load("assets/black_knight.png"), (50, 50)),
-                             pygame.transform.scale(pygame.image.load("assets/black_bishop.png"), (50, 50)),
-                             pygame.transform.scale(pygame.image.load("assets/black_queen.png"), (50, 50)),
-                             pygame.transform.scale(pygame.image.load("assets/black_king.png"), (50, 50))]
+        # track whose turn it is
+        self.white_to_move = True
+        # stack to store moves for undoing
+        self.move_log = []
 
     def draw_game_window(self):
-        self.window.fill((0, 0, 0))
+        self.window.fill((26, 26, 26))
+        self.board.draw_board(self.window)
+        self.board.draw_pieces(self.window)
 
     def run_game(self):
         pass
@@ -44,6 +37,7 @@ class Game:
                         pygame.quit()
                         sys.exit()
 
+            self.draw_game_window()
             pygame.display.update()
 
 
