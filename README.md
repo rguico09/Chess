@@ -1,8 +1,8 @@
-1   git clone https://github.com/your-username/python-chess-ai.git
-    ```bash
+1   ```bash
+    git clone https://github.com/your-username/python-chess-ai.git
     cd python-chess-ai
     ```
-
+    
 2.  **Create a virtual environment (Optional but recommended):**
     ```bash
     python -m venv venv
