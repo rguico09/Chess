@@ -46,28 +46,29 @@ class Game:
                     coordinates = pygame.mouse.get_pos()
                     col = coordinates[0] // SQUARE_SIZE
                     row = coordinates[1] // SQUARE_SIZE
-                    if self.square_selected == (row, col): # player seleted same square twice
-                        self.square_selected = ()
-                        self.player_clicks = []
-                    else:
-                        self.square_selected = (row, col)
-                        self.player_clicks.append(self.square_selected)
+                    if 0 <= row < 8 and 0 <= col < 8:
+                        if self.square_selected == (row, col): # player seleted same square twice
+                            self.square_selected = ()
+                            self.player_clicks = []
+                        else:
+                            self.square_selected = (row, col)
+                            self.player_clicks.append(self.square_selected)
                     
-                    if len(self.player_clicks) == 2:
-                        start_row, start_col = self.player_clicks[0]
-                        end_row, end_col = self.player_clicks[1]
+                        if len(self.player_clicks) == 2:
+                            start_row, start_col = self.player_clicks[0]
+                            end_row, end_col = self.player_clicks[1]
 
-                        piece = self.board.board[start_row][start_col]
+                            piece = self.board.board[start_row][start_col]
 
-                        if piece:
-                            piece.row = end_row
-                            piece.col = end_col
+                            if piece:
+                                piece.row = end_row
+                                piece.col = end_col
 
-                            self.board.board[end_row][end_col] = piece
-                            self.board.board[start_row][start_col] = None
+                                self.board.board[end_row][end_col] = piece
+                                self.board.board[start_row][start_col] = None
             
-                        self.square_selected = ()
-                        self.player_clicks = []
+                            self.square_selected = ()
+                            self.player_clicks = []
 
             self.run_game()
             self.draw_game_window()
