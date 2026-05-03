@@ -3,18 +3,21 @@ from settings import *
 from piece import Piece
 class Board:
     def __init__(self):
-        board_layout = [["bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR"],
-                       ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
-                       ["--", "--", "--", "--", "--", "--", "--", "--"],
-                       ["--", "--", "--", "--", "--", "--", "--", "--"],
-                       ["--", "--", "--", "--", "--", "--", "--", "--"],
-                       ["--", "--", "--", "--", "--", "--", "--", "--"],
-                       ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
-                       ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]]
+        self.board_layout = [["bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR"],
+                            ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
+                            ["--", "--", "--", "--", "--", "--", "--", "--"],
+                            ["--", "--", "--", "--", "--", "--", "--", "--"],
+                            ["--", "--", "--", "--", "--", "--", "--", "--"],
+                            ["--", "--", "--", "--", "--", "--", "--", "--"],
+                            ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
+                            ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]]
         self.board = [[None for _ in range(8)] for _ in range(8)]
+        self.generate_board()
+
+    def generate_board(self):
         for row in range(8):
             for col in range(8):
-                symbol = board_layout[row][col]
+                symbol = self.board_layout[row][col]
                 if symbol != "--":
                     colour = symbol[0]
                     name = symbol[1]
