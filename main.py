@@ -4,7 +4,6 @@ from board import Board
 
 class Game:
     def __init__(self):
-        # initialise pygame essentials
         pygame.init()
         pygame.display.set_caption("Chess")
         self.clock = pygame.time.Clock()
@@ -46,18 +45,28 @@ class Game:
                 piece = self.board.board[start_row][start_col]
                 
                 if piece:
-                    piece.row = end_row
-                    piece.col = end_col
-
-                    self.board.board[end_row][end_col] = piece
-                    self.board.board[start_row][start_col] = None
-            
+                    # Check if it's the correct turn
+                    if (piece.colour == 'w' and self.white_to_move) or (piece.colour == 'b' and not self.white_to_move):
+                        valid_moves = piece.get_valid_moves(self.board.board)
+                        if (end_row, end_col) in valid_moves:
+                            # Move the piece
+                            piece.row = end_row
+                            piece.col = end_col
+                            self.board.board[end_row][end_col] = piece
+                            self.board.board[start_row][start_col] = None
+                            # Toggle turn
+                            self.white_to_move = not self.white_to_move
+                        else:
+                            # Invalid move, reset selection but keep first click if player clicked another of their own pieces?
+                            # For simplicity, just reset
+                            pass
+                print(self.white_to_move)
+                
                 self.square_selected = ()
                 self.player_clicks = []
 
     def game_loop(self):
         while True:
-            # fps = 60
             self.clock.tick(FPS)
 
             for event in pygame.event.get():

@@ -1,6 +1,7 @@
 import pygame
 from settings import *
-from piece import Piece
+from piece import Piece, Pawn, Rook, Knight, Bishop, Queen, King
+
 class Board:
     def __init__(self):
         self.board_layout = [["bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR"],
@@ -15,13 +16,22 @@ class Board:
         self.generate_board()
 
     def generate_board(self):
+        piece_map = {
+            'p': Pawn,
+            'R': Rook,
+            'N': Knight,
+            'B': Bishop,
+            'Q': Queen,
+            'K': King
+        }
         for row in range(8):
             for col in range(8):
                 symbol = self.board_layout[row][col]
                 if symbol != "--":
                     colour = symbol[0]
                     name = symbol[1]
-                    self.board[row][col] = Piece(colour, name, row, col)
+                    piece_class = piece_map.get(name, Piece)
+                    self.board[row][col] = piece_class(colour, name, row, col)
 
     def draw_board(self, window):
         for row in range(8):
