@@ -40,7 +40,7 @@ class Pawn(Piece):
             if self.is_on_board(nr, nc):
                 target = board[nr][nc]
                 if target is not None and target.colour != self.colour:
-                    moves.append([nr, nc])
+                    moves.append((nr, nc))
         
         return moves
 

@@ -8,6 +8,7 @@ class Game:
         pygame.display.set_caption("Chess")
         self.clock = pygame.time.Clock()
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        self.font = pygame.font.Font('freesansbold.ttf', 20)
         self.board = Board()
         # track whose turn it is
         self.white_to_move = True
@@ -17,11 +18,21 @@ class Game:
         self.square_selected = ()
         # where to move selected piece
         self.player_clicks = []
+        # captured pieces
+        self.captured_white = []
+        self.captured_black = []
 
     def draw_game_window(self):
         self.window.fill((26, 26, 26))
         self.board.draw_board(self.window)
         self.board.draw_pieces(self.window)
+        
+        if self.white_to_move:
+            turn = self.font.render("White turn", True, (255, 255, 255))
+            self.window.blit(turn, (25, 625))
+        else:
+            turn = self.font.render("Black turn", True, (255, 255, 255))
+            self.window.blit(turn, (25, 625))
 
     def run_game(self):
         pass
@@ -49,6 +60,16 @@ class Game:
                     if (piece.colour == 'w' and self.white_to_move) or (piece.colour == 'b' and not self.white_to_move):
                         valid_moves = piece.get_valid_moves(self.board.board)
                         if (end_row, end_col) in valid_moves:
+                            # Handle capture
+                            captured_piece = self.board.board[end_row][end_col]
+                            if captured_piece:
+                                if captured_piece.colour == 'w':
+                                    self.captured_white.append(captured_piece)
+                                    print(self.captured_white[-1].name)
+                                else:
+                                    self.captured_black.append(captured_piece)
+                                    print(self.captured_black[-1].name)
+                            
                             # Move the piece
                             piece.row = end_row
                             piece.col = end_col
@@ -57,10 +78,8 @@ class Game:
                             # Toggle turn
                             self.white_to_move = not self.white_to_move
                         else:
-                            # Invalid move, reset selection but keep first click if player clicked another of their own pieces?
-                            # For simplicity, just reset
+                            # Invalid move
                             pass
-                print(self.white_to_move)
                 
                 self.square_selected = ()
                 self.player_clicks = []
