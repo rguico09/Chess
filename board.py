@@ -4,12 +4,14 @@ from piece import Piece, Pawn, Rook, Knight, Bishop, Queen, King
 
 class Board:
     def __init__(self):
+        # "colour"+"piece", e.g. "bR" = black Rook
+        # "--" represents empty square
         self.board_layout = [["bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR"],
                             ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
-                            ["--", "--", "--", "--", "--", "--", "--", "--"],
-                            ["--", "--", "--", "--", "--", "--", "--", "--"],
-                            ["--", "--", "--", "--", "--", "--", "--", "--"],
-                            ["--", "--", "--", "--", "--", "--", "--", "--"],
+                            [None, None, None, None, None, None, None, None],
+                            [None, None, None, None, None, None, None, None],
+                            [None, None, None, None, None, None, None, None],
+                            [None, None, None, None, None, None, None, None],
                             ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
                             ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]]
         self.board = [[None for _ in range(8)] for _ in range(8)]
@@ -17,17 +19,14 @@ class Board:
 
     def generate_board(self):
         piece_map = {
-            'p': Pawn,
-            'R': Rook,
-            'N': Knight,
-            'B': Bishop,
-            'Q': Queen,
-            'K': King
+            "p": Pawn, "R": Rook, "N": Knight,
+            "B": Bishop, "Q": Queen, "K": King
         }
+
         for row in range(8):
             for col in range(8):
                 symbol = self.board_layout[row][col]
-                if symbol != "--":
+                if symbol is not None:
                     colour = symbol[0]
                     name = symbol[1]
                     piece_class = piece_map.get(name, Piece)

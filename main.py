@@ -28,14 +28,11 @@ class Game:
         self.board.draw_pieces(self.window)
         
         if self.white_to_move:
-            turn = self.font.render("White turn", True, (255, 255, 255))
+            turn = self.font.render("White to move", True, (255, 255, 255))
             self.window.blit(turn, (25, 625))
         else:
-            turn = self.font.render("Black turn", True, (255, 255, 255))
+            turn = self.font.render("Black to move", True, (255, 255, 255))
             self.window.blit(turn, (25, 625))
-
-    def run_game(self):
-        pass
 
     def move_pieces(self):
         coordinates = pygame.mouse.get_pos()
@@ -65,10 +62,8 @@ class Game:
                             if captured_piece:
                                 if captured_piece.colour == 'w':
                                     self.captured_white.append(captured_piece)
-                                    print(self.captured_white[-1].name)
                                 else:
                                     self.captured_black.append(captured_piece)
-                                    print(self.captured_black[-1].name)
                             
                             # Move the piece
                             piece.row = end_row
@@ -83,6 +78,9 @@ class Game:
                 
                 self.square_selected = ()
                 self.player_clicks = []
+
+    def run_game(self):
+        pass
 
     def game_loop(self):
         while True:
