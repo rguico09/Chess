@@ -9,6 +9,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.font = pygame.font.Font('freesansbold.ttf', 20)
+        # instantiate Board object
         self.board = Board()
         # track whose turn it is
         self.white_to_move = True
@@ -24,11 +25,13 @@ class Game:
         self.captured_white = []
         self.captured_black = []
 
+    # for drawing necessary objects onto the window
     def draw_game_window(self):
         self.window.fill((26, 26, 26))
+        pygame.draw.rect(self.window, (0, 0, 0), (600, 0, 210, 600))
         self.board.draw_board(self.window)
-        self.highlight_squares()
         self.board.draw_pieces(self.window)
+        self.highlight_squares()
         
         # rendering some messages
         reset_message = self.font.render("Press 'R' to restart game.", True, (255, 255, 255))
@@ -41,6 +44,7 @@ class Game:
             turn = self.font.render("Black to move", True, (255, 255, 255))
             self.window.blit(turn, (25, 625))
 
+    # highlights valid moves for selected piece
     def highlight_squares(self):
         if self.square_selected != ():
             r, c = self.square_selected
@@ -58,6 +62,7 @@ class Game:
                 for move in self.valid_moves:
                     self.window.blit(s, (move[1] * SQUARE_SIZE, move[0] * SQUARE_SIZE))
 
+    # handles piece movement
     def move_pieces(self):
         coordinates = pygame.mouse.get_pos()
         col = coordinates[0] // SQUARE_SIZE
@@ -112,9 +117,12 @@ class Game:
                 self.player_clicks = []
                 self.valid_moves = []
 
+    # handles game rules
+    # check, checkmate, en passant, castling, pawn promotion, etc.
     def run_game(self):
         pass
 
+    # reset game
     def reset_game(self):
         self.board = Board()
         self.white_to_move = True
@@ -125,6 +133,7 @@ class Game:
         self.captured_white = []
         self.captured_black = []
 
+    # main game loop
     def game_loop(self):
         while True:
             self.clock.tick(FPS)

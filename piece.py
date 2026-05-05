@@ -8,15 +8,18 @@ class Piece:
         self.col = col
         self.id = colour + name
 
+    # to render the piece
     def draw(self, window):
         padding = SQUARE_SIZE * 0.1
         x = self.col * SQUARE_SIZE + padding
         y = self.row * SQUARE_SIZE + padding
         window.blit(IMAGES[self.id], (x, y))
     
+    # determine valid moves
     def get_valid_moves(self, board):
         return []
     
+    # determine if next possible move is within board dimensions
     def is_on_board(self, row, col):
         return (0 <= row < 8) and (0 <= col < 8)
 

@@ -5,7 +5,7 @@ from piece import Piece, Pawn, Rook, Knight, Bishop, Queen, King
 class Board:
     def __init__(self):
         # "colour"+"piece", e.g. "bR" = black Rook
-        # "--" represents empty square
+        # None represents empty square
         self.board_layout = [["bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR"],
                             ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
                             [None, None, None, None, None, None, None, None],
@@ -17,6 +17,7 @@ class Board:
         self.board = [[None for _ in range(8)] for _ in range(8)]
         self.generate_board()
 
+    # generate board list
     def generate_board(self):
         piece_map = {
             "p": Pawn, "R": Rook, "N": Knight,
@@ -32,12 +33,14 @@ class Board:
                     piece_class = piece_map.get(name, Piece)
                     self.board[row][col] = piece_class(colour, name, row, col)
 
+    # renders empty board
     def draw_board(self, window):
         for row in range(8):
             for col in range(8):
                 color = WHITE if (row + col) % 2 == 0 else GREEN
                 pygame.draw.rect(window, color, (col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
 
+    # renders pieces onto the board
     def draw_pieces(self, window):
         for row in range(8):
             for col in range(8):
