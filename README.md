@@ -41,4 +41,5 @@ The AI is currently being developed using the following milestones:
 Contributions are welcome! If you have ideas for improving the AI or adding new UI features:
 1. Fork the Project.
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
-3. Commit your Changes (`git commit -m 'AddNormally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.
+3. Commit your Changes (`git commit -m 'Add comment'`)
+4. Push your Changes for review (`git push origin main`)
