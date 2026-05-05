@@ -7,6 +7,8 @@ SQUARE_SIZE = 75
 
 GREEN = (0, 153, 51)
 WHITE = (255, 255, 255)
+HIGHLIGHT = (255, 0, 0, 100) # red with transparency
+SELECT_COLOR = (0, 0, 255, 100) # blue with transparency
 
 IMAGES = {}
 
