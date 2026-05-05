@@ -30,7 +30,7 @@
 ## 🤖 AI Roadmap
 
 The AI is currently being developed using the following milestones:
-- [ ] Basic move generation.
+- [x] Basic move generation.
 - [ ] Piece-Square tables for board evaluation.
 - [ ] Implementation of **Minimax Algorithm**.
 - [ ] Optimization using **Alpha-Beta Pruning**.
