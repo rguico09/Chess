@@ -33,7 +33,7 @@ class Game:
         self.board.draw_pieces(self.window)
         self.highlight_squares()
         
-        # rendering some messages
+        # rendering some messages to help out user
         reset_message = self.font.render("Press 'R' to restart game.", True, (255, 255, 255))
         self.window.blit(reset_message, (25, 675))
 
@@ -64,6 +64,9 @@ class Game:
 
     # handles piece movement
     def move_pieces(self):
+        def is_correct_turn(piece):
+            return (piece.colour == 'w') == self.white_to_move
+
         coordinates = pygame.mouse.get_pos()
         col = coordinates[0] // SQUARE_SIZE
         row = coordinates[1] // SQUARE_SIZE
@@ -79,7 +82,7 @@ class Game:
             if len(self.player_clicks) == 1:
                 r, c = self.player_clicks[0]
                 piece = self.board.board[r][c]
-                if piece and ((piece.colour == 'w' and self.white_to_move) or (piece.colour == 'b' and not self.white_to_move)):
+                if piece and (is_correct_turn(piece)):
                     self.valid_moves = piece.get_valid_moves(self.board.board)
                 else:
                     self.valid_moves = []
@@ -92,7 +95,7 @@ class Game:
                 
                 if piece:
                     # check if it's the correct turn
-                    if (piece.colour == 'w' and self.white_to_move) or (piece.colour == 'b' and not self.white_to_move):
+                    if is_correct_turn(piece):
                         if (end_row, end_col) in self.valid_moves:
                             # handle capture
                             captured_piece = self.board.board[end_row][end_col]
@@ -109,9 +112,6 @@ class Game:
                             self.board.board[start_row][start_col] = None
                             # toggle turn
                             self.white_to_move = not self.white_to_move
-                        else:
-                            # invalid move
-                            pass
                 
                 self.square_selected = ()
                 self.player_clicks = []
