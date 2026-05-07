@@ -2,6 +2,15 @@ import pygame, sys
 from settings import *
 from board import Board
 
+class Move:
+    def __init__(self, start_sq, end_sq, board):
+        self.start_row = start_sq[0]
+        self.start_col = start_sq[1]
+        self.end_row = end_sq[0]
+        self.end_col = end_sq[1]
+        self.piece_moved = board[self.start_row][self.start_col]
+        self.piece_captured = board[self.end_row][self.end_col]
+
 class Game:
     def __init__(self):
         pygame.init()
@@ -36,6 +45,8 @@ class Game:
         # rendering some messages to help out user
         reset_message = self.font.render("Press 'R' to restart game.", True, (255, 255, 255))
         self.window.blit(reset_message, (25, 675))
+        undo_message = self.font.render("Press 'Z' to undo move.", True, (255, 255, 255))
+        self.window.blit(undo_message, (25, 725))
 
         if self.white_to_move:
             turn = self.font.render("White to move", True, (255, 255, 255))
@@ -97,6 +108,10 @@ class Game:
                     # check if it's the correct turn
                     if is_correct_turn(piece):
                         if (end_row, end_col) in self.valid_moves:
+                            # create move object
+                            move = Move(self.player_clicks[0], self.player_clicks[1], self.board.board)
+                            self.move_log.append(move)
+
                             # handle capture
                             captured_piece = self.board.board[end_row][end_col]
                             if captured_piece:
@@ -116,6 +131,29 @@ class Game:
                 self.square_selected = ()
                 self.player_clicks = []
                 self.valid_moves = []
+
+    # undoes the last move
+    def undo_move(self):
+        if len(self.move_log) != 0:
+            move = self.move_log.pop()
+            # move piece back
+            move.piece_moved.row = move.start_row
+            move.piece_moved.col = move.start_col
+            self.board.board[move.start_row][move.start_col] = move.piece_moved
+            # restore captured piece
+            self.board.board[move.end_row][move.end_col] = move.piece_captured
+            if move.piece_captured:
+                if move.piece_captured.colour == 'w':
+                    self.captured_white.pop()
+                else:
+                    self.captured_black.pop()
+            # toggle turn back
+            self.white_to_move = not self.white_to_move
+            
+            # clear selection and valid moves
+            self.square_selected = ()
+            self.player_clicks = []
+            self.valid_moves = []
 
     # handles game rules
     # check, checkmate, en passant, castling, pawn promotion, etc.
@@ -148,6 +186,8 @@ class Game:
                         sys.exit()
                     if event.key == pygame.K_r:
                         self.reset_game()
+                    if event.key == pygame.K_z:
+                        self.undo_move()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     self.move_pieces()
 
