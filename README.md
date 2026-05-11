@@ -35,7 +35,7 @@ The AI is currently being developed using the following milestones:
 - [x] Basic move generation.
 - [ ] Piece-Square tables for board evaluation.
 - [ ] Implementation of **Minimax Algorithm**.
-- [ ] Optimization using **Alpha-Beta Pruning**.
+- [ ] Optimisation using **Alpha-Beta Pruning**.
 - [ ] Move ordering and opening book integration.
 
 ## 🤝 Contributing
