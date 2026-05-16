@@ -31,9 +31,9 @@
 
 ## ⏰ Roadmap 
 
-[x] Version 1: Fully functional 2-player game
-[ ] Version 2: Minimax implementation
-[ ] Version 3: Alpha-Beta pruning implementation
+- [ ] Version 1: Fully functional 2-player game
+- [ ] Version 2: Minimax implementation
+- [ ] Version 3: Alpha-Beta pruning implementation
 
 ## 🤝 Contributing
 
