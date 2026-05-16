@@ -29,14 +29,11 @@
 3.  **Move Pieces:** Click on a piece to see valid moves, then click the destination square.
 4.  **Special Moves:** The game will automatically handle logic for castling and promotions.
 
-## 🤖 AI Roadmap
+## ⏰ Roadmap 
 
-The AI is currently being developed using the following milestones:
-- [x] Basic move generation.
-- [ ] Piece-Square tables for board evaluation.
-- [ ] Implementation of **Minimax Algorithm**.
-- [ ] Optimisation using **Alpha-Beta Pruning**.
-- [ ] Move ordering and opening book integration.
+[x] Version 1: Fully functional 2-player game
+[ ] Version 2: Minimax implementation
+[ ] Version 3: Alpha-Beta pruning implementation
 
 ## 🤝 Contributing
 

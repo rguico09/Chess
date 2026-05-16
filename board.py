@@ -15,15 +15,11 @@ class Board:
                             ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
                             ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]]
         self.board = [[None for _ in range(8)] for _ in range(8)]
-        self.generate_board()
-
-    # generate board list
-    def generate_board(self):
+        # generate board list
         piece_map = {
             "p": Pawn, "R": Rook, "N": Knight,
             "B": Bishop, "Q": Queen, "K": King
         }
-
         for row in range(8):
             for col in range(8):
                 symbol = self.board_layout[row][col]

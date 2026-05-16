@@ -23,6 +23,8 @@ class Game:
         # valid moves for selected piece
         self.valid_moves = []
         # captured pieces
+        #! organise into respective pieces
+        #! so that captured piece for each player can be rendered
         self.captured_white = []
         self.captured_black = []
 
